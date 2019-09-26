@@ -1,6 +1,6 @@
 ---
-title: "Sleep Quality and Risk Taking in a General Population"
+title: "Are Sleep Quality and Risk Taking Related in a General Population?"
 output: html_document
 ---
 
-This is the page about my undergraduate dissertation.
+This is the page about my undergraduate dissertation which was titled "Sleep Quality and Risk Taking in a General Population".

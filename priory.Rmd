@@ -1,7 +1,9 @@
 ---
-title: Examination of Shame and Early Maladaptive Schemas as Mediators of the Relationship
-  between Childhood Trauma and Severity of Alcohol Misuse
+title: "What Factors Mediate the Relationship between Childhood Trauma and Alcohol Misuse?"
 output: html_document
 ---
 
-This is a page about the project i was involved in with the Priory and NHS.
+This is a page about the project i was involved in with the Priory and NHS which was titled "Examination of Shame and Early Maladaptive Schemas as Mediators of the Relationship between Childhood Trauma and Severity of Alcohol Misuse".
+
+
+

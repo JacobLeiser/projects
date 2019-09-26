@@ -11,17 +11,17 @@ navbar:
     - text: "Home"
       icon: fa-home
       href: index.html
-    - text: "Investigating the Role of Genre in Language Processing and Comprehension"
+    - text: "Does Genre Influence Language Processing and Comprehension?"
       icon: fa-eye
       href: eyetrack.html
-    - text: "Examination of Shame and Early Maladaptive Schemas as Mediators of the Relationship between Childhood Trauma and Severity of Alcohol Misuse"
-      icon: fa-hospital-user
+    - text: "What Factors Mediate the Relationship between Childhood Trauma and Alcohol Misuse?"
+      icon: fa-hospital
       href: priory.html
-    - text: "Sleep Quality and Risk Taking in a General Population"
-      icon: fa-snooze
+    - text: "Are Sleep Quality and Risk Taking Related in a General Population?"
+      icon: fa-bed
       href: sleep.html
     - text: "Research Interests and Future Projects"
-      icon: fa-next
+      icon: fa-fast-forward
       href: interests.html
     - text: "Info"
       icon: fa-info-circle
