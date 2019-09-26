@@ -1,6 +1,9 @@
 ---
 title: "Research Interests and Future Projects"
-output: html_document
 ---
 
 This is a page where I talk about my research interests in data science and future projects I would like to conduct.
+
+As a keen fan of sports, I would be very interested in working with football data. I like companies like Opta and that Sports Science one. 
+
+I would also love to work with online music streaming data, for example spotify as I think people's music trends can tell a lot about the person.

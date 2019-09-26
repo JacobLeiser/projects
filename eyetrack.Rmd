@@ -1,6 +1,16 @@
 ---
 title: "Does Genre Influence Language Processing and Comprehension?"
-output: html_document
 ---
 
 This is the page about my Masters dissertation titled "Investigating the Role of Genre in Language Processing and Comprehension".
+
+Intro
+A german study found that when text with grammatical errors was embedded in a poetry context, it was processed more easily (quicker reading time) and understood better (higher accuracy in post-trail comprehension questions). German allows for looser word order constraints than English so it is interesting to see what happens in English.
+
+Method
+We employed an online survey to measure instinctive feelings of the sentences from native English speakers.
+We also did an in-person eye tracking study in which we used 6 measures: FFD, FPF, RPD, TRT, PI and PO. There were also post-trial comprehension questions to test if the participants understood the sentences.
+
+Analysis
+We used linear mixed effects models for each analysis. The acceptability ratings we used ___, for the continous eye tracking data we used __, for the answer accuracy we used binary logistic regression.
+These are our results.

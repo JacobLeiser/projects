@@ -1,6 +1,5 @@
 ---
-title: "Homepage"
-output: html_document
+title: "Home"
 ---
 
 I am a Masters student who recently graduated with Distinction from the Research Methods of Psychological Science MSc from the University of Glasgow. I have a strong foundation of qualitative science and am interested in a career in data science.

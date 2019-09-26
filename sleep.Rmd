@@ -1,6 +1,11 @@
 ---
 title: "Are Sleep Quality and Risk Taking Related in a General Population?"
-output: html_document
 ---
 
 This is the page about my undergraduate dissertation which was titled "Sleep Quality and Risk Taking in a General Population".
+
+There is a lot of literature which shows the influence of sleep on aspect of decision making, specifically poor sleep leading to lower cognitive ability but a maintenance of confidence. Considering high-risk jobs which may naturally involve poor sleep, for example, junior doctors, this relationship requires further investigation.
+
+We decided to look into this in the general population and with a wide age range as the literature focusses on adolescents and clinically bad sleepers. I coded the BART experiment in OpenSesame using pre-existing code. I had never used Python before so it was a case of reverse-engineering it, but am very happy with the final outcome.
+
+The analysis consistsed of correlations. We found __

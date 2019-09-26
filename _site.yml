@@ -11,20 +11,20 @@ navbar:
     - text: "Home"
       icon: fa-home
       href: index.html
-    - text: "Does Genre Influence Language Processing and Comprehension?"
+    - text: "Eye Tracking"
       icon: fa-eye
       href: eyetrack.html
-    - text: "What Factors Mediate the Relationship between Childhood Trauma and Alcohol Misuse?"
+    - text: "Trauma and Alcohol"
       icon: fa-hospital
       href: priory.html
-    - text: "Are Sleep Quality and Risk Taking Related in a General Population?"
+    - text: "Sleep and Risk"
       icon: fa-bed
       href: sleep.html
     - text: "Research Interests and Future Projects"
-      icon: fa-fast-forward
+      icon: fa-forward
       href: interests.html
     - text: "Info"
       icon: fa-info-circle
       menu: 
-        - text: "Email: jacob.leiser@gmail.com" 
+        - text: "Email: jacob.leiser@gmail.com"
         - text: "Download CV"
