@@ -1,0 +1,30 @@
+name: "Jacob Leiser Website"  
+author: "Jacob Leiser"  
+output_dir: "docs"  
+output:  
+  html_document:  
+    self_contained: no  
+    theme: journal  
+navbar:  
+  title: "Jacob Leiser"
+  right:
+    - text: "Home"
+      icon: fa-home
+      href: index.html
+    - text: "Education"
+      icon: fa-graduation-cap
+      href: index.html
+    - text: "Clinical Experience"
+      icon: fa-hospital-symbol
+      href: index.html
+    - text: "Research"
+      icon: fa-book
+      href: index.html
+    - text: "Other Interests"
+      icon: fa-user
+      href: index.html
+    - text: "Info"
+      icon: fa-info-circle
+      menu: 
+        - text: "Email: jacob.leiser@gmail.com" 
+        - text: "Download CV"
