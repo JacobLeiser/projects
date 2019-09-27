@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -169,6 +172,101 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -230,8 +328,15 @@ $(document).ready(function () {
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Email: jacob.leiser@gmail.com</li>
-    <li class="dropdown-header">Download CV</li>
+    <li>
+      <a href="mailto:jacob.leiser@gmail.com">Email: jacob.leiser@gmail.com</a>
+    </li>
+    <li>
+      <a href="https://www.linkedin.com/in/jacobleiser/">Linked In</a>
+    </li>
+    <li>
+      <a href="jacob_leiser_cv.pdf">Download CV</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -248,11 +353,31 @@ $(document).ready(function () {
 </div>
 
 
-<p>I am a Masters student who recently graduated with Distinction from the Research Methods of Psychological Science MSc from the University of Glasgow. I have a strong foundation of qualitative science and am interested in a career in data science.</p>
-<p>This website is a platform where I showcase the projects I have worked on and code that I have written that was used in these projects as well as future projects I am interested in working on.</p>
+<div style="float: right; height: 432px; width: 288px;">
+<p><img src="jgrad.jpg" style="width: 100%;"></p>
+</div>
+<div id="about-me" class="section level1">
+<h1>About Me</h1>
+<p>My name is Jacob Leiser, I’m a recent Masters graduate with a strong foundation in quantitative data collection and analysis and am now pursuing a career in data science. This website gives some background information about me, highlights the main projects I have worked and shows examples of code I have used for these projects. I have always worked in R and am confident in a number of processes in this language: data manipulation, wrangling, analysis and visualisation. I have experience of git and version control (used to make this website), limited experience of Matlab and Python but am hoping to learn the latter online in the near future. I have also been taking online Machine Learning courses to further extend my skill base.</p>
+</div>
+<div id="education" class="section level1">
+<h1>Education</h1>
+<p>I recently graduated with a Distinction in the ‘Research Methods of Psychological Science’ MSc course from the University of Glasgow. I graduated with a 2:1 in ‘Psychology’ from the same university in 2018. Both the undergraduate and masters courses were quantitatively-focussed and I developed my coding skills through specific classes such as ‘Statistics’, ‘Advanced Statistics’ and ‘Data Skills for Reproducible Science’. The dissertation I wrote for both courses were analysed by myself using R. You can read all about my Masters dissertation and see the code I used to analyse the various types of data I collected <a href="eyetrack.html">here</a> and click <a href="sleep.html">here</a> to find out more about my undergraduate dissertation.</p>
+</div>
+<div id="work-experience" class="section level1">
+<h1>Work Experience</h1>
+<p>Since May 2017, I have worked at the Priory Hospital in Glasgow. This is a mental health facility which cares for three main clinical groups: general psychiatry (primarily anxiety and depression), addictions and eating disorders. My role as a Healthcare Assistant involves general clinical duties like observations as well as more specific tasks such as drug-testing and nasogastric feed restraint.</p>
+<p>From May 2017-2019 I was a Research Assistant for a Priory/NHS collaborative study investigating potential mediators of the relationship between childhood trauma and alcohol misuse in later life. You can read more about this project and my role in it <a href="priory.html">here</a>.</p>
+</div>
+<div id="interests" class="section level1">
+<h1>Interests</h1>
+<p>I am a keen fan of football, music and film. I would love to get the chance to combine my interests and work in data science in the world of football. I speak about plans for future projects <a href="interests.html">here</a></p>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 

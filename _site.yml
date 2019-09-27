@@ -27,4 +27,8 @@ navbar:
       icon: fa-info-circle
       menu: 
         - text: "Email: jacob.leiser@gmail.com"
+          href: mailto:jacob.leiser@gmail.com
+        - text: "Linked In"
+          href: https://www.linkedin.com/in/jacobleiser/
         - text: "Download CV"
+          href: jacob_leiser_cv.pdf
