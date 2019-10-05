@@ -1,16 +1,48 @@
 ---
 title: "Does Genre Influence Language Processing and Comprehension?"
+output:
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
-This is the page about my Masters dissertation titled "Investigating the Role of Genre in Language Processing and Comprehension".
+# Background
+This study formed the research project and dissertation aspect of my Masters course. The project ran from September 2018 to August 2019 and was titled "Investigating the Role of Genre in Language Processing and Comprehension". 
+In language research it is widely observed that incorrect grammar requires more processing (reflected in increased reading times) and poorer comprehension. However, there is evidence from different languages of genre (a chosen linguistic style of text) influencing this grammaticality effect. This study aimed to replicate the findings of German pilot data which found ungrammatical sentences to be processed more easily and understood better when embedded in poetry compared to prose.
 
-Intro
-A german study found that when text with grammatical errors was embedded in a poetry context, it was processed more easily (quicker reading time) and understood better (higher accuracy in post-trail comprehension questions). German allows for looser word order constraints than English so it is interesting to see what happens in English.
+# Online Sentence Acceptability Survey
+40 short sentences were created for the stimuli, with 4 versions of each: grammatical poem, ungrammatical poem, grammatical prose and ungrammatical prose. The first aspect of the study was to run a small, online pilot survey to collect overt ratings from native English speakers on the 'acceptability' of the sentences. Genre was between-subjects so participants either saw poetry or prose sentences but grammaticality was within-subjects with half of each list of sentences was grammatical and the other half ungrammatical. Participants would read each of the 40 sentences and provide a rating from 1 (not acceptable at all) to 7 (perfectly acceptable). 81 participants took part in the online survey.
+
+## The Data
+The aim of this part of the study was to identify if genre or grammaticality, or both, had a significant effect on the acceptability ratings of the sentences. As per the University of Glasgow's policy on data collection and storage, I am not authorised to provide the data set I collected but will show an example of the form it took in order to help illustrate the data manipulation process.
+
+When the data was downloaded from the Jisc survey platform, there were four lists which looked like this:
+
+![Each participant had their own row with every sentence number given its own column. The number in the column is the acceptability rating provided by the participant for that particular sentence.](original_survey_data.jpg)
+
+This is not ideal for analysis so some data manipulation was required in order for the data to be 'tidy'. Initially, I put the data in long form so that every observation had its own row. I did this individually for each of the 4 lists and I will show this process for list 1. List 1 consisted of all poetry sentences, with sentences 1-20 grammatically correct and sentences 21-40 grammatically incorrect. 
+
+```{r, eval=FALSE}
+library(tidyverse) #Load in required package. This includes the 'dplyr' package that I will use a lot to manipulate the data.
+
+list1 <- read.csv("list1.csv") %>% #Load in data
+  gather("sentence", "rating", -1) %>% #Gather the data into long form, apart from ID number
+  mutate(sentence = gsub("Q", "", sentence)) #This removes the Q from the start of each sentence number
+list1$sentence <- as.numeric(list1$sentence) #Tell R to treat sentence number as a numeric value 
+list1 <- list1 %>% 
+  mutate(genre = "poetry", #Add a genre variable and assign all List 1 observations "poetry"
+         type = ifelse(sentence <=20, "grammatical", "ungrammatical")) #Add a type variable and sentences numbers 1-20 are assigned "grammatical", sentences 21-40 are assigned "ungrammatical".
+```
+
+
+![After data manipulation, every column is a variable and every row is an observation.](long_survey_data.jpg)
+
 
 Method
 We employed an online survey to measure instinctive feelings of the sentences from native English speakers.
 We also did an in-person eye tracking study in which we used 6 measures: FFD, FPF, RPD, TRT, PI and PO. There were also post-trial comprehension questions to test if the participants understood the sentences.
 
 Analysis
-We used linear mixed effects models for each analysis. The acceptability ratings we used ___, for the continous eye tracking data we used __, for the answer accuracy we used binary logistic regression.
+We used linear mixed effects models for each analysis. The acceptability ratings we used ___, for the continuous eye tracking data we used __, for the answer accuracy we used binary logistic regression.
 These are our results.
+

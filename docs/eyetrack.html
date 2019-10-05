@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -169,6 +172,101 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -255,13 +353,44 @@ $(document).ready(function () {
 </div>
 
 
-<p>This is the page about my Masters dissertation titled “Investigating the Role of Genre in Language Processing and Comprehension”.</p>
-<p>Intro A german study found that when text with grammatical errors was embedded in a poetry context, it was processed more easily (quicker reading time) and understood better (higher accuracy in post-trail comprehension questions). German allows for looser word order constraints than English so it is interesting to see what happens in English.</p>
+<div id="background" class="section level1">
+<h1>Background</h1>
+<p>This study formed the research project and dissertation aspect of my Masters course. The project ran from September 2018 to August 2019 and was titled “Investigating the Role of Genre in Language Processing and Comprehension”. In language research it is widely observed that incorrect grammar requires more processing (reflected in increased reading times) and poorer comprehension. However, there is evidence from different languages of genre (a chosen linguistic style of text) influencing this grammaticality effect. This study aimed to replicate the findings of German pilot data which found ungrammatical sentences to be processed more easily and understood better when embedded in poetry compared to prose.</p>
+</div>
+<div id="online-sentence-acceptability-survey" class="section level1">
+<h1>Online Sentence Acceptability Survey</h1>
+<p>40 short sentences were created for the stimuli, with 4 versions of each: grammatical poem, ungrammatical poem, grammatical prose and ungrammatical prose. The first aspect of the study was to run a small, online pilot survey to collect overt ratings from native English speakers on the ‘acceptability’ of the sentences. Genre was between-subjects so participants either saw poetry or prose sentences but grammaticality was within-subjects with half of each list of sentences was grammatical and the other half ungrammatical. Participants would read each of the 40 sentences and provide a rating from 1 (not acceptable at all) to 7 (perfectly acceptable). 81 participants took part in the online survey.</p>
+<div id="the-data" class="section level2">
+<h2>The Data</h2>
+<p>The aim of this part of the study was to identify if genre or grammaticality, or both, had a significant effect on the acceptability ratings of the sentences. As per the University of Glasgow’s policy on data collection and storage, I am not authorised to provide the data set I collected but will show an example of the form it took in order to help illustrate the data manipulation process.</p>
+<p>When the data was downloaded from the Jisc survey platform, there were four lists which looked like this:</p>
+<div class="figure">
+<img src="original_survey_data.jpg" alt="Each participant had their own row with every sentence number given its own column. The number in the column is the acceptability rating provided by the participant for that particular sentence." />
+<p class="caption">Each participant had their own row with every sentence number given its own column. The number in the column is the acceptability rating provided by the participant for that particular sentence.</p>
+</div>
+<p>This is not ideal for analysis so some data manipulation was required in order for the data to be ‘tidy’. Initially, I put the data in long form so that every observation had its own row. I did this individually for each of the 4 lists and I will show this process for list 1. List 1 consisted of all poetry sentences, with sentences 1-20 grammatically correct and sentences 21-40 grammatically incorrect.</p>
+<pre class="r"><code>library(tidyverse) #Load in required package. This includes the &#39;dplyr&#39; package that I will use a lot to manipulate the data.
+
+list1 &lt;- read.csv(&quot;list1.csv&quot;) %&gt;% #Load in data
+  gather(&quot;sentence&quot;, &quot;rating&quot;, -1) %&gt;% #Gather the data into long form, apart from ID number
+  mutate(sentence = gsub(&quot;Q&quot;, &quot;&quot;, sentence)) #This removes the Q from the start of each sentence number
+list1$sentence &lt;- as.numeric(list1$sentence) #Tell R to treat sentence number as a numeric value 
+list1 &lt;- list1 %&gt;% 
+  mutate(genre = &quot;poetry&quot;, #Add a genre variable and assign all List 1 observations &quot;poetry&quot;
+         type = ifelse(sentence &lt;=20, &quot;grammatical&quot;, &quot;ungrammatical&quot;)) #Add a type variable and sentences numbers 1-20 are assigned &quot;grammatical&quot;, sentences 21-40 are assigned &quot;ungrammatical&quot;.</code></pre>
+<div class="figure">
+<img src="long_survey_data.jpg" alt="After data manipulation, every column is a variable and every row is an observation." />
+<p class="caption">After data manipulation, every column is a variable and every row is an observation.</p>
+</div>
 <p>Method We employed an online survey to measure instinctive feelings of the sentences from native English speakers. We also did an in-person eye tracking study in which we used 6 measures: FFD, FPF, RPD, TRT, PI and PO. There were also post-trial comprehension questions to test if the participants understood the sentences.</p>
-<p>Analysis We used linear mixed effects models for each analysis. The acceptability ratings we used _<strong>, for the continous eye tracking data we used </strong>, for the answer accuracy we used binary logistic regression. These are our results.</p>
+<p>Analysis We used linear mixed effects models for each analysis. The acceptability ratings we used _<strong>, for the continuous eye tracking data we used </strong>, for the answer accuracy we used binary logistic regression. These are our results.</p>
+</div>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 
