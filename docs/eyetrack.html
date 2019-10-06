@@ -365,8 +365,8 @@ div.tocify {
 <p>The aim of this part of the study was to identify if genre or grammaticality, or both, had a significant effect on the acceptability ratings of the sentences. As per the University of Glasgow’s policy on data collection and storage, I am not authorised to provide the data set I collected but will show an example of the form it took in order to help illustrate the data manipulation process.</p>
 <p>When the data was downloaded from the Jisc survey platform, there were four lists which looked like this:</p>
 <div class="figure">
-<img src="original_survey_data.jpg" alt="Each participant had their own row with every sentence number given its own column. The number in the column is the acceptability rating provided by the participant for that particular sentence." />
-<p class="caption">Each participant had their own row with every sentence number given its own column. The number in the column is the acceptability rating provided by the participant for that particular sentence.</p>
+<img src="original_survey_data.jpg" alt="Each participant had their own row with every sentence number given its own column. The number in each cell is the acceptability rating provided by the participant for that particular sentence number." />
+<p class="caption">Each participant had their own row with every sentence number given its own column. The number in each cell is the acceptability rating provided by the participant for that particular sentence number.</p>
 </div>
 <p>This is not ideal for analysis so some data manipulation was required in order for the data to be ‘tidy’. Initially, I put the data in long form so that every observation had its own row. I did this individually for each of the 4 lists and I will show this process for list 1. List 1 consisted of all poetry sentences, with sentences 1-20 grammatically correct and sentences 21-40 grammatically incorrect.</p>
 <pre class="r"><code>library(tidyverse) #Load in required package. This includes the &#39;dplyr&#39; package that I will use a lot to manipulate the data.
@@ -377,13 +377,33 @@ list1 &lt;- read.csv(&quot;list1.csv&quot;) %&gt;% #Load in data
 list1$sentence &lt;- as.numeric(list1$sentence) #Tell R to treat sentence number as a numeric value 
 list1 &lt;- list1 %&gt;% 
   mutate(genre = &quot;poetry&quot;, #Add a genre variable and assign all List 1 observations &quot;poetry&quot;
-         type = ifelse(sentence &lt;=20, &quot;grammatical&quot;, &quot;ungrammatical&quot;)) #Add a type variable and sentences numbers 1-20 are assigned &quot;grammatical&quot;, sentences 21-40 are assigned &quot;ungrammatical&quot;.</code></pre>
+         type = ifelse(sentence &lt;=20, &quot;grammatical&quot;, &quot;ungrammatical&quot;)) %&gt;%  #Add a type variable and sentences numbers 1-20 are assigned &quot;grammatical&quot;, sentences 21-40 are assigned &quot;ungrammatical&quot;.
+  select(Unique.Response.Number, sentence, genre, type, rating) #Reorder the columns so that rating is last.</code></pre>
 <div class="figure">
-<img src="long_survey_data.jpg" alt="After data manipulation, every column is a variable and every row is an observation." />
-<p class="caption">After data manipulation, every column is a variable and every row is an observation.</p>
+<img src="long_survey_data.jpg" alt="After data manipulation, every row is an observation and every column is a variable. Working along the column you can see the participant ID, the sentence number, what genre the sentence was, whether it was grammatically correct or incorrect and the acceptability rating given by the participant." />
+<p class="caption">After data manipulation, every row is an observation and every column is a variable. Working along the column you can see the participant ID, the sentence number, what genre the sentence was, whether it was grammatically correct or incorrect and the acceptability rating given by the participant.</p>
 </div>
-<p>Method We employed an online survey to measure instinctive feelings of the sentences from native English speakers. We also did an in-person eye tracking study in which we used 6 measures: FFD, FPF, RPD, TRT, PI and PO. There were also post-trial comprehension questions to test if the participants understood the sentences.</p>
-<p>Analysis We used linear mixed effects models for each analysis. The acceptability ratings we used _<strong>, for the continuous eye tracking data we used </strong>, for the answer accuracy we used binary logistic regression. These are our results.</p>
+<p>All 4 lists were altered in this way. In order to be used in analysis, all lists were joined and the two predictor variables (‘genre’ and grammaticality aka ‘type’) were mean-centre predictor coded. This means that, for two variables, one is assigned the value 0.5 and the other -0.5 but if there were more participants in one of the groups then these values will be slightly off 0.5.</p>
+<pre class="r"><code>all_data &lt;- bind_rows(list1, list2, list3, list4) #Stacks all four lists on top of each other.
+
+all_data$genre_code &lt;- scale(ifelse(all_data$genre == &quot;poetry&quot;, 0, 1), scale = FALSE) #Mean centre predictor coding the genre variable. 
+all_data$type_code &lt;- scale(ifelse(all_data$type == &quot;grammatical&quot;, 0, 1), scale = FALSE) #Same process for the type variable.
+all_data$rating &lt;- factor(all_data$rating) #The response variable needs to be a factor.
+colnames(all_data)[colnames(all_data)==&quot;Unique.Response.Number&quot;] &lt;- &quot;id&quot; #Rename the participant column &#39;id&#39; for simplicity.</code></pre>
+<p>After this, the data is ready for statistical analysis. The final data looks like this:</p>
+<p><img src="final_survey_data.jpg" /></p>
+</div>
+<div id="analysis" class="section level2">
+<h2>Analysis</h2>
+<p>Prior to conducting inferential analyses, an interaction plot was consulted. This plot shows the average acceptability rating of sentences for each combination of variables.</p>
+<p><img src="acceptability_rating_plot.jpeg" /></p>
+<p>Judging from the plot, there is no interaction between genre type and grammaticality type. There is a clear difference in the acceptability ratings of grammatical and ungrammatical sentences with the latter condition resulting in much lower acceptability ratings, regardless of text genre. Prose sentences were rated very slightly lower than poetry sentences in both grammatical and ungrammatical conditions.</p>
+<p>In order to test this inferentially,</p>
+<p>The aim of data analysis was to identify if either of the two predictor variables genre (poetry or prose) or grammaticality type (grammatical or ungrammatical) had a significant effect on the response variable (sentence acceptability rating).</p>
+<pre class="r"><code>reg_default &lt;- clmm(rating ~ genre_code * type_code +  
+              (1 + type_code | id) +  
+              (1 + type_code*genre_code| sentence),
+            data = all_data)</code></pre>
 </div>
 </div>
 

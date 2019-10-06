@@ -13,12 +13,12 @@ In language research it is widely observed that incorrect grammar requires more 
 # Online Sentence Acceptability Survey
 40 short sentences were created for the stimuli, with 4 versions of each: grammatical poem, ungrammatical poem, grammatical prose and ungrammatical prose. The first aspect of the study was to run a small, online pilot survey to collect overt ratings from native English speakers on the 'acceptability' of the sentences. Genre was between-subjects so participants either saw poetry or prose sentences but grammaticality was within-subjects with half of each list of sentences was grammatical and the other half ungrammatical. Participants would read each of the 40 sentences and provide a rating from 1 (not acceptable at all) to 7 (perfectly acceptable). 81 participants took part in the online survey.
 
-## The Data
+##    The Data
 The aim of this part of the study was to identify if genre or grammaticality, or both, had a significant effect on the acceptability ratings of the sentences. As per the University of Glasgow's policy on data collection and storage, I am not authorised to provide the data set I collected but will show an example of the form it took in order to help illustrate the data manipulation process.
 
 When the data was downloaded from the Jisc survey platform, there were four lists which looked like this:
 
-![Each participant had their own row with every sentence number given its own column. The number in the column is the acceptability rating provided by the participant for that particular sentence.](original_survey_data.jpg)
+![Each participant had their own row with every sentence number given its own column. The number in each cell is the acceptability rating provided by the participant for that particular sentence number.](original_survey_data.jpg)
 
 This is not ideal for analysis so some data manipulation was required in order for the data to be 'tidy'. Initially, I put the data in long form so that every observation had its own row. I did this individually for each of the 4 lists and I will show this process for list 1. List 1 consisted of all poetry sentences, with sentences 1-20 grammatically correct and sentences 21-40 grammatically incorrect. 
 
@@ -31,18 +31,52 @@ list1 <- read.csv("list1.csv") %>% #Load in data
 list1$sentence <- as.numeric(list1$sentence) #Tell R to treat sentence number as a numeric value 
 list1 <- list1 %>% 
   mutate(genre = "poetry", #Add a genre variable and assign all List 1 observations "poetry"
-         type = ifelse(sentence <=20, "grammatical", "ungrammatical")) #Add a type variable and sentences numbers 1-20 are assigned "grammatical", sentences 21-40 are assigned "ungrammatical".
+         type = ifelse(sentence <=20, "grammatical", "ungrammatical")) %>%  #Add a type variable and sentences numbers 1-20 are assigned "grammatical", sentences 21-40 are assigned "ungrammatical".
+  select(Unique.Response.Number, sentence, genre, type, rating) #Reorder the columns so that rating is last.
 ```
 
 
-![After data manipulation, every column is a variable and every row is an observation.](long_survey_data.jpg)
+![After data manipulation, every row is an observation and every column is a variable. Working along the column you can see the participant ID, the sentence number, what genre the sentence was, whether it was grammatically correct or incorrect and the acceptability rating given by the participant.](long_survey_data.jpg)
 
 
-Method
-We employed an online survey to measure instinctive feelings of the sentences from native English speakers.
-We also did an in-person eye tracking study in which we used 6 measures: FFD, FPF, RPD, TRT, PI and PO. There were also post-trial comprehension questions to test if the participants understood the sentences.
+All 4 lists were altered in this way. In order to be used in analysis, all lists were joined and the two predictor variables ('genre' and grammaticality aka 'type') were mean-centre predictor coded. This means that, for two variables, one is assigned the value 0.5 and the other -0.5 but if there were more participants in one of the groups then these values will be slightly off 0.5. 
 
-Analysis
-We used linear mixed effects models for each analysis. The acceptability ratings we used ___, for the continuous eye tracking data we used __, for the answer accuracy we used binary logistic regression.
-These are our results.
+```{r, eval=FALSE}
+
+all_data <- bind_rows(list1, list2, list3, list4) #Stacks all four lists on top of each other.
+
+all_data$genre_code <- scale(ifelse(all_data$genre == "poetry", 0, 1), scale = FALSE) #Mean centre predictor coding the genre variable. 
+all_data$type_code <- scale(ifelse(all_data$type == "grammatical", 0, 1), scale = FALSE) #Same process for the type variable.
+all_data$rating <- factor(all_data$rating) #The response variable needs to be a factor.
+colnames(all_data)[colnames(all_data)=="Unique.Response.Number"] <- "id" #Rename the participant column 'id' for simplicity.
+
+```
+
+After this, the data is ready for statistical analysis. The final data looks like this:
+
+![](final_survey_data.jpg)
+
+##    Analysis
+Prior to conducting inferential analyses, an interaction plot was consulted. This plot shows the average acceptability rating of sentences for each combination of variables. 
+
+![](acceptability_rating_plot.jpeg)
+
+Judging from the plot, there is no interaction between genre type and grammaticality type. There is a clear difference in the acceptability ratings of grammatical and ungrammatical sentences with the latter condition resulting in much lower acceptability ratings, regardless of text genre. Prose sentences were rated very slightly lower than poetry sentences in both grammatical and ungrammatical conditions.
+
+In order to test this inferentially, 
+
+
+The aim of data analysis was to identify if either of the two predictor variables genre (poetry or prose) or grammaticality type (grammatical or ungrammatical) had a significant effect on the response variable (sentence acceptability rating).
+
+```{r, eval=FALSE}
+reg_default <- clmm(rating ~ genre_code * type_code +  
+              (1 + type_code | id) +  
+              (1 + type_code*genre_code| sentence),
+            data = all_data)
+```
+
+
+
+
+
 
