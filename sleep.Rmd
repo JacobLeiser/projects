@@ -2,4 +2,167 @@
 title: "Are Sleep Quality and Risk Taking Related in a General Population?"
 ---
 
-When finished, this page will highlight the full research process of my undergraduate dissertation project which was titled "Sleep Quality and Risk Taking in a General Population". I worked with multiple forms of data and I will show and explain the code I wrote to organise and prepare this data for analysis. Additionally, I will show the process by which I edited existing Python code (found on Github) of the behavioural task used in my study to the specifications I required. This was my first experience of Python code so the process was akin to reverse-engineering.  
+# Background
+This study was the research project element of my undergraduate dissertation entitled "Sleep Quality and Risk-Taking in a General Population". The aim of the research was to discover the impact that sleep quality has on risk-taking in general population sample which covered a wide age range. There is a lot of evidence that shows the effect of poor sleep on other forms of decision-making. This is especially evident, and dangerous, in cases such as junior doctors who work a lot of unsocial hours but are also entrusted to make potentially life-changing decisions. I hypothesised that sleep quality would be negatively associated with risk-taking so that the poorer someone's sleep is, the more risk their behaviour is.  
+
+In order to answer the research question, participants completed a survey consisting of five short questionnaires that gathered subjective reports of sleep behaviour and measures of aspects of mental health such as depression and anxiety. They then completed a computerised behavioural task that acts as a proxy measure for risk-taking propensity. 
+
+# Sleep and Mental Health Questionnaire
+## The Data
+The five questionnaires that participants saw were the Pittsburgh Sleep Quality Inventory (PSQI), Sleep Condition Indicator (SCI), Generalised Anxiety Disorder 7 (GAD-7), Personal Health Questionnaire 9 (PHQ-9) and the Stanford Sleepiness Scale (SSC). In most of the questions across the surveys, participants were required to pick one of four answers in response to a statement about their sleep/health. In these types of questions, each answer corresponds to a score so the qualitative statements can be easily scored quantitatively. I combined these five questionnaires into one online survey which participants completed prior to taking the behavioural task. 
+
+When the survey data was downloaded, it required a lot of manipulation to be suitable for analysis. I initially did some simple, text-based changes in Excel such as changing the written questions into the corresponding question number for ease during data manipulation in R. When the data was then loaded into R, the data from each questionnaire needed to be separated and scored according to its specific scoring system.
+
+In the code below, I split the data from the individual questionnaires into new variables:
+
+```{r, eval=FALSE}
+library(tidyverse) #Load required package
+
+full_survey <- read.csv("All Survey Data.csv") #Create variable for all questionnaire data
+
+psqi_scoring <- select(full_survey, 1, 5, 7:22) #Create variable with just the PSQI data
+sci_scoring <- select(full_survey, 1, 23:30) #SCI data
+gad_scoring <- select(full_survey, 1, 31:37) #GAD data
+phq_scoring <- select(full_survey, 1, 38:46) #PHQ data
+ssc_scoring <- select(full_survey, 1, 47) #SSC data
+
+```
+
+After separating the individual surveys, they needed to be scored. This required a few different processes to be carried out. For SCI, GAD and PHQ it was just a case of summing each answer for a total score. For PSQI there was a specific scoring system that had to be followed. This process involved grouping certain answers together to form 7 different components which were then summed to get a final score for the measure. The PSQI also uses standardised scoring for particular questions. 
+
+For example, in order to get a score for Component 2, you take the answer to Q2 and assign a standardised score to it (<15 mins = 0, 16-30 mins = 1, 31-60 mins = 2, >60 mins = 3). To this number, you then add the answer to Q5a and the sum of these two numbers is again standardised (0=0, 1->2=1, 3->4=2, 5->6=3) and this score is then the final value for component 2.
+
+The code below shows how I scored each component of the PSQI questionnaire.
+
+```{r, eval=FALSE}
+#Component 1 was simply the answer given in Q9.
+psqi_scoring$c1 <- psqi_scoring$psqi_q9 #Create a new column, c1, which copies column psqi_q9  
+
+#Component 2 requires a number of processes, as described above.
+psqi_scoring <- mutate(psqi_scoring,
+                       psqi_q2 = case_when(psqi_q2 <= 15 ~ 0,  #Assign standardised scores to Q2 answers
+                                           psqi_q2 >= 16 & psqi_q2 <= 30 ~ 1,
+                                           psqi_q2 >= 31 & psqi_q2 <= 60 ~ 2,
+                                           psqi_q2 > 60 ~ 3)) 
+psqi_scoring <- mutate(psqi_scoring, c2 = psqi_q2 + psqi_q5a) #Create column which is the sum of Q2 and Q5a
+psqi_scoring <- mutate(psqi_scoring, 
+                       c2 = case_when(c2 == 0 ~ 0, #Assign standardised scores to the sum
+                                      c2 >= 1 & c2 <= 2 ~ 1,
+                                      c2 >= 3 & c2 <= 4 ~ 2,
+                                      c2 >= 5 & c2 <= 6 ~ 3))
+
+#Component 3 was just a standardised score applied to the answers in Q4a.
+psqi_scoring <- mutate(psqi_scoring, 
+                       c3 = case_when(psqi_q4a > 7 ~ 0, #Assign standardised scores to Q4a answers
+                                      psqi_q4a >= 6 & psqi_q4a <= 7 ~ 1,
+                                      psqi_q4a >= 5 & psqi_q4a < 6 ~ 2,
+                                      psqi_q4a < 5 ~ 3))
+
+#Component 4 required the percentage of time each participant spent asleep while in bed to be calculated and these percentages were then standardised.
+psqi_scoring <- mutate(psqi_scoring, c4 = (psqi_q4a/psqi_q4b)*100) #Calculate percentage asleep
+psqi_scoring <- mutate(psqi_scoring, c4 = case_when(c4 >= 85 ~ 0, #Assign standardised scores to percentages
+                                                    c4 >= 75 & c4 <= 84 ~ 1,
+                                                    c4 >= 65 & c4 <= 74 ~ 2,
+                                                    c4 <= 64 ~ 3))
+
+#Component 5 was the sum of questions 5b to 5j and then standardised.
+psqi_scoring <- psqi_scoring %>% #Create a new column for the row total of columns Q5b - Q5j
+                mutate(c5 = select(., psqi_q5b:psqi_q5j) %>% 
+                         rowSums())
+psqi_scoring <- mutate(psqi_scoring, 
+                       c5 = case_when(c5 == 0 ~ 0, #Assign standardised scores to sum of Q5b-Q5j answers
+                                      c5 >= 1 & c5 <= 9 ~ 1,
+                                      c5 >= 10 & c5 <= 18 ~ 2,
+                                      c5 >= 19 & c5 <= 27 ~ 3))
+            
+#Component 6 was simply the answer given in Q6
+psqi_scoring$c6 <- psqi_scoring$psqi_q6
+
+#Component 7 was the sum of Q7 and Q8 and then standardised.
+psqi_scoring <- mutate(psqi_scoring, c7 = psqi_q7 + psqi_q8) #Q7 + Q8
+psqi_scoring <- mutate(psqi_scoring, c7 = case_when(c7 == 0 ~ 0, #Assign standardised scores to the sum
+                                                    c7 >= 1 & c7 <= 2 ~ 1,
+                                                    c7 >= 3 & c7 <= 4 ~ 2,
+                                                    c7 >= 5 & c7 <= 6 ~ 3))
+
+#Total
+psqi_scoring <- mutate(psqi_scoring, #Create a column, total, for the sum of all components
+                       total = select(psqi_scoring, c1:c7) %>% 
+                         rowSums())
+
+```
+
+For the SCI, GAD and PHQ measures I can simply sum the individual answers to get the total.
+
+```{r, eval=FALSE}
+sci_scoring <- mutate(sci_scoring, total = select(sci_scoring, sci_q1:sci_q8) %>%
+                        rowSums())
+
+gad_scoring <- mutate(gad_scoring, total = select(gad_scoring, gad_q1:gad_q7) %>%
+                        rowSums())
+
+phq_scoring <- mutate(phq_scoring, total = select(phq_scoring, phq_q1:phq_q9) %>%
+                        rowSums())
+
+```
+
+With each individual measure having a final score, I can create a new data frame containing the id, age and gender of each participant from the original df and then add the scores for the various measures. Throughout the data manipulation process, they will have remained in the same order so I can just paste the columns in as they are.
+
+```{r, eval=FALSE}
+#Create a new data frame with id, age and gender columns from the original data set and measure scores.
+final_data <- data.frame("id" = full_survey$id,
+                         "age" = full_survey$age,
+                         "gender" = full_survey$gender,
+                         "psqi" = psqi_scoring$total,
+                         "sci" = sci_scoring$total,
+                         "phq" = phq_scoring$total,
+                         "ssc" = ssc_scoring$ssc)
+
+```
+
+
+# Baloon Analogue Risk Task
+The experiment I used in the study was the Balloon Analogue Risk Task which is a computerised decision-making task designed to be a proxy measure of risk. In very general terms, participants have to inflate a balloon and stop before they think it will burst. For each inflation without the balloon popping the participant earns money/points but if the balloon bursts they lose all money/points accrued for that balloon. As the balloon increases in size, the likelihood of it bursting increases so the participant has to decide when to stop inflating the balloon and saves their money/points. 
+
+## Coding the Experiment
+For my experiment I wanted twenty trials (twenty balloons) with one balloon popping on the 1st inflation, one on the 2nd up to 20th inflation. These odds would be the same for all participants but in a randomised order so that everyone had the same opportunity to earn points. I found existing code on Github which was for one trial of the BART task and I had to edit the code to suit my specifications and how I wanted the experiment to appear/sound. I can explain the process by which I did this but need to work out the most appropriate way of showing the original python code and then the changes I made.
+
+##The Data
+The experiment tracked a lot of data for each participant. Below is a screenshot of one participant's data file for their BART. This means there are a lot of ways to measure someone's performance on the task e.g. total number of points, decision-making time but the designers of the task suggest that the best value to measure riskiness is the "Adjusted Value". This value is the average number of inflations for cashed in balloons which, in practical terms, means I could ignore all trials for which the balloons exploded and then just had to find the average for the remaining trials.
+
+Below I show how I calculate the adjusted value for each pariticipant.
+
+```{r, eval=FALSE}
+library(tidyverse) #Load required package
+
+#Create a list of all individual participant data files
+bart <- lapply(list.files(pattern = "subject"), read.csv, header = TRUE, stringsAsFactors = FALSE) %>% 
+  do.call("rbind", .) #Bind them all into one dataframe.
+
+bart$rounds <- as.numeric(bart$rounds) #Change the data type of required columns to numerical
+bart$response_time_Trial_decision <- as.numeric(bart$response_time_Trial_decision)
+```
+
+In order to find the adjusted value, I only required two columns from the larger data set. I needed the column which counted the number of inflations for each balloon and the trial decision column which was either "space" or "return" which inflated or cashed in the balloons, respectively.
+
+In the code below, I make a new data frame for the adjusted value. Each trial (balloon) ends when a participant presses the 'return' key so I initially filter the large data set to only include these occurences. With this filter, I select the round number (number of inflations) of each occurence of 'return' and then take an average to get the adjusted value. 
+
+```{r, eval=FALSE}
+return_rounds <- bart %>% 
+  filter(response_Trial_decision == "return") %>% #Filter bart data by return presses
+  select(subject_nr, rounds) #Select subject id and round number data for return press occurences
+
+adj_val <- return_rounds %>% 
+  group_by(subject_nr) %>% #Calculate for each subject id...
+  summarise(adjusted_value = mean(rounds)) %>% #... the average number of inflations on cashed in balloons
+  round(1)
+
+final_data$av <- adj_val$adjusted_value #Add adjusted value for each participant to final data
+```
+
+
+# Analysis
+
+
+# Results
+

@@ -14,12 +14,12 @@ navbar:
     - text: "Eye Tracking"
       icon: fa-eye
       href: eyetrack.html
-    - text: "Trauma and Alcohol"
-      icon: fa-hospital
-      href: priory.html
     - text: "Sleep and Risk"
       icon: fa-bed
       href: sleep.html
+    - text: "Trauma and Alcohol"
+      icon: fa-hospital
+      href: priory.html
     - text: "Research Interests and Future Projects"
       icon: fa-forward
       href: interests.html
