@@ -20,7 +20,7 @@ navbar:
     - text: "Trauma and Alcohol"
       icon: fa-hospital
       href: priory.html
-    - text: "Research Interests and Future Projects"
+    - text: "Smaller Projects"
       icon: fa-forward
       href: interests.html
     - text: "Info"
