@@ -2,6 +2,27 @@
 title: "What Factors Mediate the Relationship between Childhood Trauma and Alcohol Misuse?"
 ---
 
-When finished, this page will provide an overview of my role in the Priory and NHS collaborative research project which I was involved in. The study was titled "Examination of Shame and Early Maladaptive Schemas as Mediators of the Relationship between Childhood Trauma and Severity of Alcohol Misuse". My role was data collection and then dissemination so I was crucially involved throughout the process. 
+The collaborative Priory and NHS research project which I was involved in was titled "Examination of Shame and Early Maladaptive Schemas as Mediators of the Relationship between Childhood Trauma and Severity of Alcohol Misuse". The project was aiming to find what factors mediate the relationship between early life trauma and subsequent alcohol issues.
 
-I will explain my involvement in further detail but generally I recruited participants from The Priory Hospital in Glasgow and assisted them in completing a battery of questionnaires. Once the data had been analysed by the head researcher, Dr Joanne Halcrow of NHS Tayside, I presented the results to a diverse audience of healthcare professionals as part of a CPD presentation.
+#Research Background
+
+There are a number of reasons that someone might develop an 'Alcohol Use Disorder' (AUD). One of the most prominently-researched factors are known as 'Adverse Childhood Events' (ACE) such being the victim of neglect or having a family member with a severe mental health condition. 
+
+Enoch (2011) found that one of the most consistent outcomes of ACEs is an increased risk of alcohol and drug disorders. This is further supported by Felitti (1998), who conducted a study of over 17,000 participants and found a graded relationship between the number of adverse childhood experiences, the risk behaviours in adulthood and physical illness contributing towards mortality. So these two studies are basically saying that ACEs increase risk of alcohol disorders and the more adverse childhood experiences someone has had further increases this risk .
+
+However, not all people that have experienced trauma in their childhood go on to develop an alcohol dependency so there must be additional factors which influence or mediate this relationship. Discovering more about these factors can highlight target areas to prevent or reduce the onset of AUD in those at risk as well as interventions to facilitate engagement with treatment and improve treatment outcomes for those with an AUD. 
+
+This project consisted of two separate studies which investigated two different factors as potential mediators of this relationship - internalised shame and early maladaptive schemas.
+
+#My Role
+As the lead Research Assistant, I carried out the data collection and subsequently presented the findings to the Priory staff. Initially, my tasks involved collecting the data from the participants. All participants were inpatients of the Alcohol Addiction Programme at the Priory Hospital in Glasgow. They were required to complete a battery of questionnaires covering a range of measures such as the Severity of Alcohol Dependence Questionnaire, the Childhood Trauma Questionnaire and the Internalised Shame Scale. The data was then analysed by Dr Joanne Halcrow (NHS Tayside).
+
+After analysis, I presented the results and key learning points to a diverse audience of healthcare professionals as part of a CPD presentation.
+
+
+#Results
+74 participants took part with 78% of the sample reporting moderate to severe alcohol dependency and 52% of the sample having had previous attempts at alcohol detox. Finally, the sample was split almost 50/50 on the presence of an additional mental health diagnosis. 
+
+We found that shame does partly explain the relationship between childhood trauma and alcohol dependence severity. Although direct causality cannot be established from this study, it is likely that shame is a consequence of abuse and as such early interventions could potentially reduce the likelihood that someone might go onto develop an AUD. Furthermore, shame should be addressed as part of addiction focused treatment, in particular, when childhood abuse has been experienced.
+
+Regarding early maladptive schemas, we found that this is also an explanatory factor in the relationship in question. Specifically, those who have experienced childhood abuse are likely to internalise feelings of being different and inferior to others as well as hopelessness. These kind of mental schemas can facilitate the development and maintenance of addictive behaviours. Again, this suggests that early interventions should be implemented on the victims of childhood abuse to ensure that these schemas don't take root and lead to alcohol problems in later life.

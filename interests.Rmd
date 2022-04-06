@@ -1,5 +1,14 @@
 ---
-title: "Research Interests and Future Projects"
+title: "Smaller Data Projects"
 ---
 
-When finished, this page will discuss specific research interests I have and projects I hope to undertake in the future. I will regularly update the website as I conduct more research and will show the code I have used. I hope to learn more about Machine Learning and other programs and languages such as Python and Tableau. In the future I would like to combine my interests of football and data to investigate various elements within the game such as identifying key factors that impact attendances such as ticket price, volume of televised games and average number of goals scored in matches. I am also very eager to learn more about data visualisation and would like to produce interesting and visually appealing graphs.
+During the covid lockdowns throughout 2020 I took on a few small data projects in different technologies. 
+
+One that was quite fun to do involved the goals scored by a favourite streamer of mine with his club in Pro Evolution Soccer. I wanted to practice making interesting, dynamic charts in Tableau so created the following animated chart which shows the number of goals scored by players over time:
+
+<video autosize:true controls>
+  <source src="pes_scorers.mp4" type="video/mp4">
+</video>
+
+
+I also carried out a lot of small analyses in Alteryx just looking into things that interest me like music and sports. Unfortunately, given that I don't use it at work, I no longer have a valid license for Alteryx so can't access the outputs of these.
