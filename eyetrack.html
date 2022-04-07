@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Does Genre Influence Language Processing and Comprehension?</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 61px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+
+.section h2 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h3 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h4 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h5 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h6 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Jacob Leiser</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="eyetrack.html">
+    <span class="fa fa-eye"></span>
+     
+    Eye Tracking
+  </a>
+</li>
+<li>
+  <a href="sleep.html">
+    <span class="fa fa-bed"></span>
+     
+    Sleep and Risk
+  </a>
+</li>
+<li>
+  <a href="priory.html">
+    <span class="fa fa-hospital"></span>
+     
+    Trauma and Alcohol
+  </a>
+</li>
+<li>
+  <a href="interests.html">
+    <span class="fa fa-forward"></span>
+     
+    Smaller Projects
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-info-circle"></span>
+     
+    Info
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="mailto:jacob.leiser@gmail.com">Email: jacob.leiser@gmail.com</a>
+    </li>
+    <li>
+      <a href="https://www.linkedin.com/in/jacobleiser/">Linked In</a>
+    </li>
+    <li>
+      <a href="jacob_leiser_cv_2022.pdf">Download CV</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Does Genre Influence Language Processing and Comprehension?</h1>
+
+</div>
+
+
+<div id="background" class="section level1">
+<h1>Background</h1>
+<p>This study formed the dissertation aspect of my Masters course. The project ran from September 2018 to August 2019 and was titled “Investigating the Role of Genre in Language Processing and Comprehension”.</p>
+<p>In language research, it is widely observed that reading text with incorrect grammar requires more processing than correct grammar (reflected in increased reading times) and results in poorer comprehension. However, there is evidence from different languages that genre (a chosen linguistic style of text e.g. poetry) can influence this grammaticality effect. This study aimed to replicate the findings of German pilot data which found ungrammatical sentences to be processed more easily and understood better when embedded in poetry compared to prose.</p>
+<p>The study consisted of two separate experiments. The first was an online survey which aimed to discover if genre influenced overt ratings of sentence ‘acceptability’ and the second experiment was made up of an eye tracking task and follow-up comprehension questions. In the sections below, you can find the code used for data manipulation, analysis and visualisation for each component of the study as well as brief summaries of the findings.</p>
+</div>
+<div id="online-sentence-acceptability-survey" class="section level1">
+<h1>Online Sentence Acceptability Survey</h1>
+<p>The first experiment of the study was an online survey which collected overt ratings from native English speakers on the ‘acceptability’ of forty short sentences (these were subsequently used in the second experiment as well). The aim of this part of the study was to identify if genre or grammaticality, or both, had a significant effect on the acceptability ratings of the sentences.</p>
+<p>The forty sentences, which were used as the stimuli, existed in each of four forms: grammatical poem, ungrammatical poem, grammatical prose and ungrammatical prose. Four lists of sentences were made using a Latin square such that each sentence appeared in each of its four forms. Genre was between-subjects so participants either saw poetry or prose sentences but grammaticality was within-subjects with half of each list of sentences being grammatical and the other half ungrammatical. Participants would read each of the forty sentences and provide a rating from 1 (not acceptable at all) to 7 (perfectly acceptable). Eighty-one participants took part in the online survey.</p>
+<div id="the-data" class="section level2">
+<h2>The Data</h2>
+<p>As per the University of Glasgow’s policy on data collection and storage, I am not authorised to provide the actual data set itself but can show an example of the form it took in order to help illustrate the data manipulation process.</p>
+<p>When the data was downloaded from the online survey platform, there were four lists which looked like this:</p>
+<div class="figure">
+<img src="original_survey_data.jpg" alt="Each row held the data for one participant with all forty sentences given their own column. The number in each cell is the acceptability rating provided by the participant for that particular sentence number." />
+<p class="caption">Each row held the data for one participant with all forty sentences given their own column. The number in each cell is the acceptability rating provided by the participant for that particular sentence number.</p>
+</div>
+<p>The data being in this form was not ideal for the analysis that would be carried out so some manipulation was required in order to ‘tidy’ the data set. Initially, I put the data in long form so that every row was an observation. I did this individually for each of the 4 lists and I will show this process performed on list 1. List 1 consisted of all poetry sentences, with sentences 1-20 grammatically correct and sentences 21-40 grammatically incorrect.</p>
+<pre class="r"><code>library(tidyverse) #Load in required package. This includes the &#39;dplyr&#39; package that I will use a lot to manipulate the data.
+
+list1 &lt;- read.csv(&quot;list1.csv&quot;) %&gt;% #Create a new variable and load in the data
+  gather(&quot;sentence&quot;, &quot;rating&quot;, -1) %&gt;% #Gather the data into long form, apart from ID number
+  mutate(sentence = gsub(&quot;Q&quot;, &quot;&quot;, sentence)) #Remove the &#39;Q&#39; character from the start of each sentence number
+
+list1$sentence &lt;- as.numeric(list1$sentence) #Change sentence number to data type numeric (required for next step)
+
+list1 &lt;- list1 %&gt;% 
+  mutate(genre = &quot;poetry&quot;, #Add a new column for the genre variable and assign all List 1 observations &quot;poetry&quot;
+         type = ifelse(sentence &lt;=20, &quot;grammatical&quot;, &quot;ungrammatical&quot;)) %&gt;%  #Add a column for the sentence type variable and sentences numbers 1-20 are assigned &quot;grammatical&quot;, sentences 21-40 are assigned &quot;ungrammatical&quot;.
+  select(Unique.Response.Number, sentence, genre, type, rating) #Reorder the columns so that rating appears last (outcome variable after predictor variables)</code></pre>
+<p>This is how the data appears after running the code above.</p>
+<div class="figure">
+<img src="long_survey_data.jpg" alt="After data manipulation, every row is an observation and every column is a variable. Working along the columns you can see the participant ID, sentence number, sentence genre, sentence grammatically and the acceptability rating given by the participant." />
+<p class="caption">After data manipulation, every row is an observation and every column is a variable. Working along the columns you can see the participant ID, sentence number, sentence genre, sentence grammatically and the acceptability rating given by the participant.</p>
+</div>
+<p>This process was repeated for each of the 4 lists with the genre and grammaticality coding changing where appropriate. Following this, all lists were joined in order to be used in analysis. The two predictor variables (‘genre’ and grammaticality (called ‘type’ in the script)) were mean-center predictor coded. This allows you to assign arbitrary numerical values to categorical variables. When you have two levels, one is assigned the value 0.5 and the other -0.5 but this number can change slightly if the samples used in each group are unbalanced.</p>
+<pre class="r"><code>all_data &lt;- bind_rows(list1, list2, list3, list4) #Create a new variable that consists of all four lists stacked on top of each other.
+
+all_data$genre_code &lt;- scale(ifelse(all_data$genre == &quot;poetry&quot;, 0, 1), scale = FALSE) #Add a new column showing the mean center predictor coding for the genre variable. 
+all_data$type_code &lt;- scale(ifelse(all_data$type == &quot;grammatical&quot;, 0, 1), scale = FALSE) #Same process for the grammaticality (&#39;type&#39;) variable.
+all_data$rating &lt;- factor(all_data$rating) #Change the data in the rating column into data type &#39;factor&#39; (required for analysis)
+colnames(all_data)[colnames(all_data)==&quot;Unique.Response.Number&quot;] &lt;- &quot;id&quot; #Rename the participant ID column &#39;id&#39; for simplicity in the model.</code></pre>
+<p>After this, the data is ready for statistical analysis. The final data looks like this:</p>
+<div class="figure">
+<img src="final_survey_data.jpg" alt="The columns are the same as before with the addition of the predictor coding for the two variables and the data from all four lists now also appear in the data set although this can’t be seen in the picture." />
+<p class="caption">The columns are the same as before with the addition of the predictor coding for the two variables and the data from all four lists now also appear in the data set although this can’t be seen in the picture.</p>
+</div>
+</div>
+<div id="analysis" class="section level2">
+<h2>Analysis</h2>
+<p>The aim of data analysis was to identify if either of the two predictor variables (genre or grammaticality) had a significant effect on the response variable (sentence acceptability rating), or indeed if there was an interaction between the two. The hypothesis was that an interaction would exist such that ungrammatical poems would be rating as more acceptable than ungrammatical prose.</p>
+<p>Prior to conducting inferential analyses, I created an interaction plot using the following code:</p>
+<pre class="r"><code>library(ggplot2) #Load in the required package for creating plots.
+
+ggplot(all_data, aes(x = genre, colour = type, group = type, y = rating)) + #x-axis is genre, y-axis is the average rating and the plot is grouped and colour-coded by grammaticality type 
+  stat_summary(fun.y = mean, geom = &quot;point&quot;, size = 2) + #specify how you want the data points to appear
+  stat_summary(fun.y = mean, geom = &quot;line&quot;, size = 1) +
+  ylab(&quot;Acceptability Rating&quot;) + #label the axes
+  xlab(&quot;Text Genre&quot;) +
+  scale_x_discrete(labels = c(&quot;Poetry&quot;, &quot;Prose&quot;)) + #label the two levels of the x axis variable
+  labs(colour = &quot;Grammaticality Type&quot;) + #label the legend box
+  scale_colour_discrete(labels = c(&quot;Grammatical&quot;, &quot;Ungrammatical&quot;)) #label the two levels of the legend box</code></pre>
+<p>This plot shows the mean acceptability rating of sentences for each combination of variables.</p>
+<div class="figure">
+<img src="acceptability_rating_plot.jpeg" alt="Judging from the plot, there is no interaction between genre type and grammaticality type. There is a clear difference in the mean acceptability rating of grammatical and ungrammatical sentences with the latter condition prompting much lower ratings, regardless of text genre. On average, prose sentences were rated very slightly lower than poetry sentences in both grammatical and ungrammatical conditions." />
+<p class="caption">Judging from the plot, there is no interaction between genre type and grammaticality type. There is a clear difference in the mean acceptability rating of grammatical and ungrammatical sentences with the latter condition prompting much lower ratings, regardless of text genre. On average, prose sentences were rated very slightly lower than poetry sentences in both grammatical and ungrammatical conditions.</p>
+</div>
+<p>Responses were discrete but rank-ordered so an ordinal logistic model was best suited for inferential analysis. The analysis used the maximal random effects structure justified by the design including random correlations. In the model, you only include the within-subjects variables when defining the random intercepts and this is done separately for subjects (in our data this is “id”) and items (in our data this is “sentence”).</p>
+<pre class="r"><code>library(ordinal) #Load in required packages
+library(psych)
+
+reg_default &lt;- clmm(rating ~ genre_code * type_code +  #outcome variable ~ predictor variables
+              (1 + type_code | id) +  #Only type is within-subjects for subjects.
+              (1 + type_code*genre_code| sentence), #Both type and genre within-subjects for items.
+            data = all_data) #Specifying the data set on which to run the model.
+
+summary(reg_default) #This gives a summary of the results of the model.</code></pre>
+</div>
+<div id="results" class="section level2">
+<h2>Results</h2>
+<p>Consistent with the descriptive statistics, inferential analysis results showed no significant interaction and no significant main effect of genre. However, a main effect of grammaticality was found such that, independent of genre, ungrammatical sentences were rated as significantly less acceptable than those in the grammatical condition.</p>
+<p>The main effect of grammaticality was expected given that native English speakers would be likely to innately find ungrammatical sentences less acceptable than grammatical ones. However, the lack of an interaction was an indication that genre type was not sufficient in overcoming this grammaticality effect.</p>
+</div>
+</div>
+<div id="eye-tracking-and-comprehension-experiment" class="section level1">
+<h1>Eye Tracking and Comprehension Experiment</h1>
+<p>The second stage of the project was an eye tracking experiment carried out in the psychology department of the University of Glasgow. In the online survey we were testing participants’ overt ratings of the stimuli but in the eye tracking experiment we were aiming to measure the unconscious effect of genre and grammaticality. Specifically, we were investigating how the predictor variables influenced reading time of text through various eye tracking measures and comprehension success of the sentences (measured through post-trial comprehension questions).</p>
+<p>The stimuli used was the same as in the online survey with the addition of thirty filler sentences and post-trial questions for all of the original forty sentences. These were simple yes/no comprehension questions to test whether the participant had understood the roles of the subject and object in the sentence. Each question had a form for which the correct answer was “yes” and one for which the correct answer was “no”. Eight stimuli lists were created using a Latin square so that each sentence appeared in each of its four forms and followed by each question type i.e. grammatical/ungrammatical poetry/prose sentences with follow-up questions type “yes”/type “no”.</p>
+<p>During the experiment, participants’ eye movements were tracked using a desktop-mounted Eyelink 1000/2k. Each sentence was presented individually on a computer screen and participants were required to indicate with a button press when they had read it. This button press prompted either the appearance of the corresponding comprehension question or the next sentence (if the sentence they had just read was a filler). The question was answered by pressing a key on the keyboard in front of them (‘m’ = “yes” and ‘z’ = “no”). This process was repeated until they had read all seventy sentences. Forty people took part in the eye tracking experiment, this corresponded to five participants for each of the eight stimuli lists.</p>
+<p>I will describe the data manipulation process and analysis for the eye tracking and comprehension data separately.</p>
+<div id="eye-tracking-data" class="section level2">
+<h2>Eye Tracking Data</h2>
+<p>For the purposes of the eye tracking measures, the sentences were divided into four regions of interest: e.g. /R1/ Peter sets the hardest tests and Martin /R2/ knows /R3/ the students /R4/ best. This was the same approach used for all sentences such that, in the second clause, the verb was represented by region 2 and the post-verb by region 3. These were the two critical regions used in analysis as they represent the earliest (R2) and second earliest (R3) point in the sentence at which a grammatical violation could be detected.</p>
+<p>Six distinct eye tracking measures were used in the experiment. First fixation duration (FFD) is the length of time of the initial fixation on a region. First Pass Reading Time (FPRT) is the sum of fixations within a region from the initial fixation until the region is exited in either direction. Regression Path Duration (RPD) is the sum of fixations within a region from the initial fixation until the region is exited to the right. Total Reading Time (TRT) is the sum of all fixations on a region. Regression in (PRI) and regression out (PRO) are the occurrence of at least one regression into or out of a particular region, respectively.</p>
+<p>The eye tracking system allows users to specify the form of the output data. This was set up prior to data collection and so didn’t require a great deal of manipulation prior to analysis, it was in the following form:</p>
+<div class="figure">
+<img src="original_eye_data.jpg" alt="Each row shows the various output measures gathered from reading one sentence. The columns show the subject ID, the list number that the participant read sentences from, the genre of the sentence, the sentence number (item), the grammaticality of the sentence (cond), the region of interest (2 or 3) and then output data for the following measures: FFD, FPD, RPD, TRT, PRI and PRO. The example below shows the data for the first partiicpant reading the first 7 sentences of the list. Each sentence is split across two rows as the output measures were collected separately for regions 2 and 3." />
+<p class="caption">Each row shows the various output measures gathered from reading one sentence. The columns show the subject ID, the list number that the participant read sentences from, the genre of the sentence, the sentence number (item), the grammaticality of the sentence (cond), the region of interest (2 or 3) and then output data for the following measures: FFD, FPD, RPD, TRT, PRI and PRO. The example below shows the data for the first partiicpant reading the first 7 sentences of the list. Each sentence is split across two rows as the output measures were collected separately for regions 2 and 3.</p>
+</div>
+<p>The first manipulation that was required was to specify which data points to include in analysis, these decisions were based on standard approaches used in the research area e.g. fixations under 80ms are not typically included. Initially, histograms of each of the four numerical measures (FFD, FPD, RPD and TRT) were consulted and cut-offs were then applied based on outliers. No such outlier manipulation was required for the regression in/out data. The following shows the process for the first fixation duration data:</p>
+<pre class="r"><code>hist(eyedata$first_fix_dur, breaks = 100) #Fit a histogram of first fixation duration data
+
+val.FFD.dat &lt;- subset(eyedata, eyedata$first_fix_dur &gt; 80 &amp; eyedata$first_fix_dur &lt; 600) #Subset eye data to only include first fixation duration data from 80ms to 600ms</code></pre>
+<p>Furthermore, a new variable was created for each measure to separate the regions of interest. Again, showing first fixation duration as an example:</p>
+<pre class="r"><code>R2.FFD.dat &lt;- subset(val.FFD.dat, val.FFD.dat$region == 2) #Create a FFD variable for Region 2 analysis.
+R3.FFD.dat &lt;- subset(val.FFD.dat, val.FFD.dat$region == 3) #Same for region 3</code></pre>
+<p>Finally, just like for the survey data analysis, the two predictor variables (‘genre’ and ‘grammaticality’) were mean-center predictor coded to apply an arbitrary numerical value to categorical predictors. FFD example:</p>
+<pre class="r"><code>R2.FFD.dat$genre_c &lt;- scale(ifelse(R2.FFD.dat$genre == &quot;Prose&quot;,0,1), scale = FALSE)
+R2.FFD.dat$gramm_c &lt;- scale(ifelse(R2.FFD.dat$cond == &quot;U&quot;,0,1), scale = FALSE)</code></pre>
+</div>
+<div id="analysis-1" class="section level2">
+<h2>Analysis</h2>
+<p>The aim of data analysis was to identify if either of the two predictor variables genre (poetry or prose) or grammaticality type (grammatical or ungrammatical) had a significant effect on the various response variables, or if there was an interaction between the two. The hypothesis was that there would be an interaction such that ungrammatical poetry would be processed more easily (quicker reading times) than ungrammatical prose.</p>
+<p>Prior to conducting inferential analyses, an interaction plot for both regions of interest for each measure was consulted. In order to make the plot, data manipulation was required to get it into a form in which every row was a single observation. In order to do this, I wanted to keep the first 6 columns of the eye data the same but then instead of a separate column for each measure, I would gather the measures and outputs into 2 distinct columns. I did this separately for the continuous reading time measures (FFD, FPD, RPD and TRT) and then the binary measures (RI and RO).</p>
+<pre class="r"><code>numerical_gather_eyedata &lt;- eyedata %&gt;% #Create a new variable
+  select(1:10) %&gt;% #Select everything from the eye data apart from the regression in and out columns (i.e. all continuous data).
+  gather(&quot;measure&quot;, &quot;output&quot;, 7:10) #Take all of the separate measure columns and output and put them into 2 new columns of measure and output </code></pre>
+<p>This code changed the data to look like this:</p>
+<div class="figure">
+<img src="numerical_gathered_eyedata.jpg" alt="You can see now that every row is a single observation with each showing a participant’s output for one measure in one of the two regions of interest for one trial." />
+<p class="caption">You can see now that every row is a single observation with each showing a participant’s output for one measure in one of the two regions of interest for one trial.</p>
+</div>
+<p>With the data in this form, the following code was used to create a graph with an interaction plot showing the average reading time in all continuous measures for each combination of variables for both regions.</p>
+<pre class="r"><code>ggplot(numerical_gather_eyedata, aes(x = genre, colour = cond, group = cond, y = output)) + #x-axis is genre, y-axis is the output for the specific measure and group and colour-code the plot by grammaticality type
+  stat_summary(fun.y = mean, geom = &quot;point&quot;, size = 2) + #specify how you want the data points to appear
+  stat_summary(fun.y = mean, geom = &quot;line&quot;, size = 1) +
+  facet_wrap(~measure + region) + #show separate plots for each measure and each region of interest
+  ylab(&quot;Time (ms)&quot;) + #label the axes
+  xlab(&quot;Text Genre&quot;) +
+  scale_x_discrete(labels = c(&quot;Poetry&quot;, &quot;Prose&quot;)) + #add labels to the levels of the x-axis
+  labs(colour = &quot;Grammaticality Type&quot;) + #add labels to the legend
+  scale_colour_discrete(labels = c(&quot;Grammatical&quot;, &quot;Ungrammatical&quot;)) #add labels to the levels of the legend</code></pre>
+<div class="figure">
+<img src="reading_time_interaction_plot.jpeg" alt="This plot shows the mean reading time of sentences for each combination of variables in each region for FFD, FPD, RPD and TRT." />
+<p class="caption">This plot shows the mean reading time of sentences for each combination of variables in each region for FFD, FPD, RPD and TRT.</p>
+</div>
+<p>The same process was followed to get the regression in and out interaction plot.</p>
+<p><img src="regs_interaction_plot.jpeg" /></p>
+<p>Judging from the various plots, there doesn’t appear to be any interactions between genre and grammaticality. In the reading time graphs, it appears that ungrammatical sentences typically result in longer reading times, regardless of genre. Further analysis is required to get a clearer picture of the relationship between the two predictor variables.</p>
+<p>There were twelve different models used for the eye tracking data as there was one for both regions of interest for all six measures. A gamma regression model was used for the FFD, FPRT and RPD continuous data and a linear regression model was used for TRT, as the continuous data included zeros. For the RI and RO analysis, a binary logistic regression model was used. I will show one example of each of the three types of models employed in the data analysis.</p>
+<p>Gamma regression model example for FFD region 2:</p>
+<pre class="r"><code>library(lme4) #Load in required package
+library(optimx)
+
+mod.FF.R2 &lt;- glmer(first_fix_dur ~ genre_c*gramm_c + #outcome variable ~ predictor variables
+                     (1 + gramm_c | subject) + #Random intercept - only gramm_c is within-subjects for subjects
+                     (1 + genre_c*gramm_c | item), #Random intercept - genre_c and gramm_c are within-subjects for items
+                   data = R2.FFD.dat, #Specify the data set on which to run the model
+                   family = Gamma(identity), #Specify gamma regression
+                   control = glmerControl(optimizer = &quot;optimx&quot;, calc.derivs = FALSE, #Specifications of how to run the model
+                                          optCtrl = list(method = &quot;L-BFGS-B&quot;, starttests = FALSE, kkt = FALSE)))
+summary(mod.FF.R2) #This gives a summary of the results of the model.</code></pre>
+<p>Linear regression model example for TRT region 3:</p>
+<pre class="r"><code>mod.TR.R3 &lt;- lmer(total_RT ~ genre_c*gramm_c +
+                    (1 + gramm_c | subject) +
+                    (1 + genre_c*gramm_c | item),
+                  data = R3.TRT.dat,
+                  control = lmerControl(optimizer = &quot;optimx&quot;, calc.derivs = FALSE,
+                                        optCtrl = list(method = &quot;L-BFGS-B&quot;, starttests = FALSE, kkt = FALSE)))
+summary(mod.TR.R3)</code></pre>
+<p>Binary logistic regression model example for RI region 2:</p>
+<pre class="r"><code>mod.RI.R2 &lt;- glmer(regression_in ~ genre_c*gramm_c +
+                     (1 + gramm_c | subject) +
+                     (1 + genre_c*gramm_c | item),
+                   data = eyedata.R2,
+                   family = binomial(logit), #Specify binary logistic regression
+                   control = glmerControl(optimizer = &quot;optimx&quot;, calc.derivs = FALSE,
+                                          optCtrl = list(method = &quot;L-BFGS-B&quot;, starttests = FALSE, kkt = FALSE)))
+summary(mod.RI.R2)</code></pre>
+</div>
+<div id="results-1" class="section level2">
+<h2>Results</h2>
+<p>The significant results can be seen below:</p>
+<div class="figure">
+<img src="eye_results.jpg" alt="All significant main effects found were for the grammaticality variable with no interactions or main effect of genre found across all measures in either region of interest. A positive estimate indicates that ungrammatical text was read more quickly than grammatical and vice versa for a negative estimate. There are some interesting patterns within the data in terms of main effects but there is no support within the data for the hypothesis that an interaction between genre and grammaticality exists." />
+<p class="caption">All significant main effects found were for the grammaticality variable with no interactions or main effect of genre found across all measures in either region of interest. A positive estimate indicates that ungrammatical text was read more quickly than grammatical and vice versa for a negative estimate. There are some interesting patterns within the data in terms of main effects but there is no support within the data for the hypothesis that an interaction between genre and grammaticality exists.</p>
+</div>
+</div>
+</div>
+<div id="comprehension-questions" class="section level1">
+<h1>Comprehension Questions</h1>
+<p>For the post-trial comprehension questions, question type was within-subjects so that half of the questions each participant saw had the correct answer “yes” and the other half “no”. Participants indicated their answer by pressing a particular key on the keyboard (‘m’ = “yes” and ‘z’ = “no”). The questions related to the particular sentence they had just read and looked to measure each participant’s level of understanding of the semantic roles within the sentence.</p>
+<p>##Data For the comprehension data, there was an issue with transferring the output from the old MS-DOS computer that the eye tracking system was on to the modern computer that the analysis was carried out with. The error meant that the answer accuracy was coded incorrectly for about 30% of the data. This meant some data manipulation was required prior to any further analysis.</p>
+<p>In the following code, I create a new column which translates the button press from each trial into the answer it indicates (‘m’ = yes and ‘z’ = no). I then create another column which translates the question type for each trial into what the correct answer is (question type ‘byA’ = correct answer “yes” and ‘byB’ = “no”). Finally, I create a third column which compares the button press data and the correct answer data (which are now both in the same terms) and if, for each row, the values match then it was answered correctly and is assigned a 1 and if they don’t match it was answered incorrectly and assigned a 0.</p>
+<pre class="r"><code>comp_data &lt;- select(qdata, subject, list, genre, item, cond, qtype, response) #Create a new dataframe by selecting out the columns from the question answering data that I need.
+
+comp_data$par_answer &lt;- gsub(&quot; &quot;, &quot;&quot;, comp_data$response) #This creates a new &#39;participant answer&#39; column that is the same as the response column but removes the space in the character string as the following lines of code don&#39;t run properly with spaces
+comp_data$par_answer &lt;- gsub(&quot;ANSWERm&quot;, &quot;yes&quot;, comp_data$par_answer) #For the newly created column, change &quot;ANSWERm&quot; to &quot;yes&quot;
+comp_data$par_answer &lt;- gsub(&quot;ANSWERz&quot;, &quot;no&quot;, comp_data$par_answer) #For newly created column, change &quot;ANSWERz&quot; to &quot;no&quot;
+
+comp_data &lt;- comp_data[-7] #Remove the repsonse column as it is not needed anymore
+
+comp_data &lt;- mutate(comp_data, cor_answer = case_when(qtype == &quot;byA&quot; ~ &quot;yes&quot;,
+                                                      qtype == &quot;byB&quot; ~ &quot;no&quot;)) #Create a new &#39;correct answer&#39; column that looks at each cell in the &#39;question type&#39; column and if it has &quot;byA&quot; then the corresponding cell in the new column for that row is &quot;yes&quot; and if it is &quot;byB&quot; then the corresponding cell in the new column for that row is &quot;corranswer=no&quot;.
+
+comp_data &lt;- mutate(comp_data, 
+                    accuracy = ifelse((par_answer == &quot;yes&quot; &amp; cor_answer == &quot;yes&quot;) |
+                                           (par_answer == &quot;no&quot; &amp; cor_answer == &quot;no&quot;), 1, 0)) #Create a new &#39;accuracy&#39; column that compares the data in the cor_answer and par_answer columns, if they match accuracy = 1 and if not accuracy = 0. E.g. if it is question type A (correct answer &quot;yes&quot;) and the participant indicated &quot;yes&quot; (with button press &#39;m&#39;) then they will be assigned a 1 in the accuracy column but if it was question type B (correct answer &quot;no&quot;) and the participant indicated &quot;yes&quot; then they will be assigned a 0.</code></pre>
+<p>The data is now in a form which is ready for further analysis.</p>
+<div id="analysis-2" class="section level2">
+<h2>Analysis</h2>
+<p>Before inferential analysis I made a interaction plot of the two key variables of interest (genre and grammaticality) with mean answer accuracy as the output to see what kind of relationship, if any, existed between the two. The hypothesis was that an interaction would exist between genre and grammaticality such that ungrammatical poems would be understood better than ungrammatical prose.</p>
+<pre class="r"><code>descriptives &lt;- describeBy(comp_data$accuracy, list(comp_data$genre, comp_data$cond), mat = TRUE, digits = 3) #Produce a summary of descriptive statistics such as means, standard deviations and standard errors. I save it as data frame.
+
+#In the following code I create a new data frame using the data from the previous line. I could use select() to simply create a new df made up of the columns I need but in this way I can give the columns the titles as I want them to appear in the subsequent interaction plot.
+accuracy_means &lt;- data.frame(&quot;Genre&quot; = descriptives[,2], #Create a data frame with a &#39;Genre&#39; column that uses a subset of the descriptives df by indexing everything in the second column
+                            &quot;Grammaticality&quot; = rep(c(&quot;Grammatical&quot;, &quot;Ungrammatical&quot;), each = 2 ), #Create a &#39;Grammaticality&#39; column. In the descriptives df, the data is listed as G for grammatical and U for ungrammatical and I would then need to change this in the interaction plot so I make the corresponding column manually, in the same order it appears in the descriptives df. 
+                            &quot;Mean_Accuracy&quot; = descriptives[,6]) #Create a column that indexes the means from the descriptives df
+
+ggplot(accuracy_means, aes(Genre, Mean_Accuracy, colour=Grammaticality)) + #Create a plot comparing the mean accuracy for each combination of genre and grammaticality. 
+  geom_line(aes(group=Grammaticality), size=1) + #Specify how I want the plot to appear. 
+  ylab(&quot;Mean Answer Accuracy&quot;) + #Create a label for the y-axis
+  ylim(0.81, 0.85) + #Specify the size of the y axis (make sure the actual plot is taking up maximum space within the graph)
+  theme_classic() + #Edit stylistic appearance of the plot
+  scale_color_manual(values=c(&quot;#0000ff&quot;, &quot;#ff0000&quot;)) #Specify colours of the lines</code></pre>
+<div class="figure">
+<img src="comp_data_interaction_plot.jpeg" alt="The plot shows a very clear interaction between genre and grammaticality type. According to the plot, when text is ungrammatical it is understood best when embedded in poetry but when text is grammatical, it is understood best in a prose context." />
+<p class="caption">The plot shows a very clear interaction between genre and grammaticality type. According to the plot, when text is ungrammatical it is understood best when embedded in poetry but when text is grammatical, it is understood best in a prose context.</p>
+</div>
+<p>It appears that there is an interaction between the two key variables in terms of how participants understood the sentences. However, inferential analysis was required to safely draw conclusions about the relationship between the two variables.</p>
+<p>For the models used in the comprehension data analysis there were 3 predictor variables involved: genre was between-subjects and grammaticality and question type were both within-subjects. A model including all three variables was run followed by a simpler model solely consisting of the two key variables of the study; genre and grammaticality. Binary logistic regression models were used for this analysis as the form of the outcome variable was 1/0 indicating answer accuracy of correct/incorrect.</p>
+<p>Initially all three categorical variables had to be mean-center predictor coded using the following code:</p>
+<pre class="r"><code>comp_data$genre_c &lt;- scale(ifelse(comp_data$genre == &quot;Prose&quot;,0,1), scale = FALSE) #Mean-center predictor coding the categorical variables
+comp_data$gramm_c &lt;- scale(ifelse(comp_data$cond == &quot;U&quot;,0,1), scale = FALSE)
+comp_data$qtype_c &lt;- scale(ifelse(comp_data$qtype == &quot;byA&quot;,0,1), scale = FALSE)</code></pre>
+<p>The model testing all three variables as predictors of the outcome variable:</p>
+<pre class="r"><code>comp_mod.1 &lt;- glmer(accuracy ~ genre_c*gramm_c*qtype_c + #outcome variable ~ predictor variables
+                 (1 + gramm_c*qtype_c | subject) + #Random intercept - gramm_c and qtype_c are both within-subjects for subjects
+                 (1 + genre_c*gramm_c*qtype_c | item), #Random intercept - all three variables are within-subjects for items
+               data = comp_data,
+               family = binomial(logit), #Specify binary logistic regression
+               control = glmerControl(optimizer = c(&quot;bobyqa&quot;), #Specifications of how to run the model
+                                      optCtrl=list(maxfun=100000),  
+                                      tol = 0.003))
+summary(comp_mod.1) #This gives a summary of the results of the model</code></pre>
+<p>The simpler model testing only genre and grammaticality as predictors of the outcome variable:</p>
+<pre class="r"><code>comp_mod.2 &lt;- glmer(accuracy ~ genre_c*gramm_c +
+                 (1 + gramm_c | subject) +
+                 (1 + genre_c*gramm_c | item),
+               data = comp_data,
+               family = binomial(logit),
+               control = glmerControl(optimizer = c(&quot;bobyqa&quot;),
+                                      optCtrl=list(maxfun=100000),  
+                                      tol = 0.003))
+summary(comp_mod.2)</code></pre>
+</div>
+<div id="results-2" class="section level2">
+<h2>Results</h2>
+<p>The model which assessed all three predictors found no significant interactions or main effects for either genre or grammaticality. However, a significant main effect of question type was found: b = -0.77; SE = 0.37; t = -2.061; p &lt; .05. This effect showed that Q1, the form for which the correct answer was â€œyesâ€, resulted in higher answer accuracy. This could be because the form of Q2 (correct answer “no”) more closely resembled the form of the sentence and would likely prompt participant who had only shallowly processed the sentence to answer incorrectly.</p>
+<p>The inferential analysis of the model consisting of just genre and grammaticality as predictors of answer accuracy showed the interaction illustrated in the previous graph to be significant: b = -0.75; SE = 0.34; t = -2.196; p &lt; .05. It can be said that grammatical sentences in the prose condition resulted in higher comprehension success whereas it was the poetry condition which prompted superior understanding of ungrammatical sentences. When reading grammatical prose, participants were able to rely on the typical language processing frameworks to comprehend the text but in ungrammatical prose conditions, these frameworks are insufficient for comprehension. Conversely, it appears that the looser word order constraints typically associated with poetry can mitigate the effect of grammatical violations allowing readers to successfully comprehend the language.</p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
