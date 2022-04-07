@@ -218,7 +218,7 @@ $(document).ready(function () {
   <a href="interests.html">
     <span class="fa fa-forward"></span>
      
-    Research Interests and Future Projects
+    Smaller Projects
   </a>
 </li>
 <li class="dropdown">
@@ -237,7 +237,7 @@ $(document).ready(function () {
       <a href="https://www.linkedin.com/in/jacobleiser/">Linked In</a>
     </li>
     <li>
-      <a href="jacob_leiser_cv.pdf">Download CV</a>
+      <a href="jacob_leiser_cv_2022.pdf">Download CV</a>
     </li>
   </ul>
 </li>
@@ -353,14 +353,14 @@ final_data &lt;- data.frame(&quot;id&quot; = full_survey$id,
                          &quot;ssc&quot; = ssc_scoring$ssc)</code></pre>
 </div>
 </div>
-<div id="baloon-analogue-risk-task" class="section level1">
-<h1>Baloon Analogue Risk Task</h1>
+<div id="balloon-analogue-risk-task" class="section level1">
+<h1>Balloon Analogue Risk Task</h1>
 <p>The experiment I used in the study was the Balloon Analogue Risk Task which is a computerised decision-making task designed to be a proxy measure of risk. In very general terms, participants have to inflate a balloon and stop before they think it will burst. For each inflation without the balloon popping the participant earns money/points but if the balloon bursts they lose all money/points accrued for that balloon. As the balloon increases in size, the likelihood of it bursting increases so the participant has to decide when to stop inflating the balloon and saves their money/points.</p>
 <div id="coding-the-experiment" class="section level2">
 <h2>Coding the Experiment</h2>
 <p>For my experiment I wanted twenty trials (twenty balloons) with one balloon popping on the 1st inflation, one on the 2nd up to 20th inflation. These odds would be the same for all participants but in a randomised order so that everyone had the same opportunity to earn points. I found existing code on Github which was for one trial of the BART task and I had to edit the code to suit my specifications and how I wanted the experiment to appear/sound. I can explain the process by which I did this but need to work out the most appropriate way of showing the original python code and then the changes I made.</p>
 <p>##The Data The experiment tracked a lot of data for each participant. Below is a screenshot of one participant’s data file for their BART. This means there are a lot of ways to measure someone’s performance on the task e.g. total number of points, decision-making time but the designers of the task suggest that the best value to measure riskiness is the “Adjusted Value”. This value is the average number of inflations for cashed in balloons which, in practical terms, means I could ignore all trials for which the balloons exploded and then just had to find the average for the remaining trials.</p>
-<p>Below I show how I calculate the adjusted value for each pariticipant.</p>
+<p>Below I show how I calculate the adjusted value for each participant.</p>
 <pre class="r"><code>library(tidyverse) #Load required package
 
 #Create a list of all individual participant data files
@@ -370,7 +370,7 @@ bart &lt;- lapply(list.files(pattern = &quot;subject&quot;), read.csv, header = 
 bart$rounds &lt;- as.numeric(bart$rounds) #Change the data type of required columns to numerical
 bart$response_time_Trial_decision &lt;- as.numeric(bart$response_time_Trial_decision)</code></pre>
 <p>In order to find the adjusted value, I only required two columns from the larger data set. I needed the column which counted the number of inflations for each balloon and the trial decision column which was either “space” or “return” which inflated or cashed in the balloons, respectively.</p>
-<p>In the code below, I make a new data frame for the adjusted value. Each trial (balloon) ends when a participant presses the ‘return’ key so I initially filter the large data set to only include these occurences. With this filter, I select the round number (number of inflations) of each occurence of ‘return’ and then take an average to get the adjusted value.</p>
+<p>In the code below, I make a new data frame for the adjusted value. Each trial (balloon) ends when a participant presses the ‘return’ key so I initially filter the large data set to only include these occurrences. With this filter, I select the round number (number of inflations) of each occurrence of ‘return’ and then take an average to get the adjusted value.</p>
 <pre class="r"><code>return_rounds &lt;- bart %&gt;% 
   filter(response_Trial_decision == &quot;return&quot;) %&gt;% #Filter bart data by return presses
   select(subject_nr, rounds) #Select subject id and round number data for return press occurences
@@ -385,6 +385,7 @@ final_data$av &lt;- adj_val$adjusted_value #Add adjusted value for each particip
 </div>
 <div id="analysis" class="section level1">
 <h1>Analysis</h1>
+<p>Analysis code and results still to be added</p>
 </div>
 <div id="results" class="section level1">
 <h1>Results</h1>
