@@ -11,13 +11,13 @@ navbar:
     - text: "Home"
       icon: fa-home
       href: index.html
-    - text: "Eye Tracking"
+    - text: "Eye Tracking Dissertation"
       icon: fa-eye
       href: eyetrack.html
-    - text: "Sleep and Risk"
+    - text: "Sleep and Risk Dissertation"
       icon: fa-bed
       href: sleep.html
-    - text: "Trauma and Alcohol"
+    - text: "Clinical Research"
       icon: fa-hospital
       href: priory.html
     - text: "Smaller Projects"
